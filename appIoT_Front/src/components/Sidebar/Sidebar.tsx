@@ -7,8 +7,7 @@ const Sidebar: React.FC = () => {
       <ul className="sidebar-menu">
         <h1>App IoT</h1>
         <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Parcelas Eliminadas</a></li>
       </ul>
     </div>
   );

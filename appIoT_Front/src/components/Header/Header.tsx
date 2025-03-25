@@ -8,6 +8,9 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   return (
     <div className="header-container">
+      <button className="refresh-button" onClick={() => window.location.reload()}>
+        Actualizar Datos
+      </button>
       <button className="logout-button" onClick={onLogout}>
         Cerrar Sesión
       </button>

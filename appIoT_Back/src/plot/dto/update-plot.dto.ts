@@ -2,6 +2,9 @@ import { IsString, IsNumber, IsBoolean, IsOptional, IsDate } from 'class-validat
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdatePlotDto {
+  @IsString()
+  externalId: string;
+  
   @ApiProperty({ example: 'Parcela 1 Actualizada', description: 'Nombre de la parcela', required: false })
   @IsString()
   @IsOptional()

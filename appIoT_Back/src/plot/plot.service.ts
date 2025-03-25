@@ -17,6 +17,42 @@ export class PlotService {
     });
   }
 
+  async upsertPlot(data: CreatePlotDto) {
+    const existingPlot = await this.prisma.plot.findUnique({
+      where: { externalId: data.externalId }
+    });
+
+    if (existingPlot) {
+      return this.prisma.plot.update({
+        where: { id: existingPlot.id },
+        data: {
+          name: data.name,
+          location: data.location,
+          owner: data.owner,
+          plotType: data.plotType,
+          lastWatered: new Date(data.lastWatered),
+          latitude: data.latitude,
+          longitude: data.longitude,
+          isActive: data.isActive !== false
+        }
+      });
+    } else {
+      return this.prisma.plot.create({
+        data: {
+          externalId: data.externalId,
+          name: data.name,
+          location: data.location,
+          owner: data.owner,
+          plotType: data.plotType,
+          lastWatered: new Date(data.lastWatered),
+          latitude: data.latitude,
+          longitude: data.longitude,
+          isActive: true
+        }
+      });
+    }
+  }
+
   async getPlotById(id: number) {
     const plot = await this.prisma.plot.findUnique({ where: { id } });
     if (!plot) {

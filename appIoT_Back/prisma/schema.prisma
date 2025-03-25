@@ -24,6 +24,7 @@ model User {
 
 model Plot {
   id          Int        @id @default(autoincrement())
+  externalId  String     @unique
   name        String
   location    String
   owner       String
@@ -42,7 +43,7 @@ model PlotData {
   humidity     Float
   rain         Float
   sunIntensity Float
-  recordedAt   DateTime
+  recordedAt   DateTime @default(now())
   plotId       Int
   plot         Plot     @relation(fields: [plotId], references: [id])
 }

@@ -2,6 +2,12 @@ import { IsString, IsNotEmpty, IsNumber, IsBoolean, IsOptional, IsDate } from 'c
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePlotDto {
+    @ApiProperty({ example: '12345', description: 'ID único de la parcela en el sistema externo' })
+    @IsString()
+    @IsNotEmpty()
+    @IsString()
+    externalId: string;
+
     @ApiProperty({ example: 'Parcela 1', description: 'Nombre de la parcela' })
     @IsString()
     @IsNotEmpty()

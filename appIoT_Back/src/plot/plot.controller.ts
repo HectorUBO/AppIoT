@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Put, Delete } from "@nestjs/common";
+import { Controller, Post, Body, Get, Param, Put, Delete, BadRequestException } from "@nestjs/common";
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from "@nestjs/swagger";
 import { PlotService } from "./plot.service";
 import { CreatePlotDto } from "./dto/create-plot.dto";
@@ -16,6 +16,22 @@ export class PlotController {
     @ApiResponse({ status: 400, description: 'Datos inválidos' })
     async createPlot(@Body() data: CreatePlotDto) {
         return this.plotService.createPlot(data);
+    }
+
+    @Post()
+    @ApiOperation({
+        summary: 'Crear o actualizar una parcela',
+        description: 'Si la parcela con externalId ya existe, se actualiza. De lo contrario, se crea una nueva.'
+    })
+    @ApiBody({ type: CreatePlotDto })
+    async upsertPlot(
+        @Body() data: CreatePlotDto
+    ) {
+        if (!data.externalId) {
+            throw new BadRequestException('El campo externalId es requerido para UPSERT');
+        }
+
+        return this.plotService.upsertPlot(data);
     }
 
     @Get(':id')

@@ -11,6 +11,19 @@ export class PlotDataService {
         return this.prisma.plotData.create({ data });
     }
 
+    async overridePlotData(plotId: number, sensorData: CreatePlotDataDto) {
+        await this.prisma.plotData.deleteMany({
+            where: { plotId }
+        });
+
+        return this.prisma.plotData.create({
+            data: {
+                ...sensorData,
+                plotId
+            }
+        });
+    }
+
     async getPlotDataById(id: number) {
         const plotData = await this.prisma.plotData.findUnique({ where: { id } });
         if (!plotData) {
