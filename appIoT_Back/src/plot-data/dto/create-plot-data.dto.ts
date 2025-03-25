@@ -22,7 +22,7 @@ export class CreatePlotDataDto {
   @IsNotEmpty()
   sunIntensity: number;
 
-  @ApiProperty({ example: '2025-03-18 06:31:31', description: 'Fecha y hora de registro' })
+  @ApiProperty({ example: '2025-03-18T06:31:31Z', description: 'Fecha y hora de registro' })
   @IsDate()
   @IsNotEmpty()
   recordedAt: Date;

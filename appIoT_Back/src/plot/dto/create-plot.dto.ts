@@ -22,7 +22,7 @@ export class CreatePlotDto {
     @IsNotEmpty()
     plotType: string;
 
-    @ApiProperty({ example: '2025-03-18 06:31:31', description: 'Fecha de la última vez que se regó la parcela' })
+    @ApiProperty({ example: '2025-03-18T06:31:31Z', description: 'Fecha de la última vez que se regó la parcela' })
     @IsDate()
     @IsNotEmpty()
     lastWatered: Date;

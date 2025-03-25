@@ -6,10 +6,15 @@ import { UpdatePlotDto } from "./dto/update-plot.dto";
 
 @Injectable()
 export class PlotService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async createPlot(data: CreatePlotDto) {
-    return this.prisma.plot.create({ data });
+    return this.prisma.plot.create({
+      data: {
+        ...data,
+        lastWatered: new Date(data.lastWatered),
+      },
+    });
   }
 
   async getPlotById(id: number) {
